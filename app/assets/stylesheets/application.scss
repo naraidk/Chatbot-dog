@@ -29,6 +29,11 @@ html, body {
     color: #FF5D24;
 }
 
+.message-content {
+  white-space: pre-wrap;
+  line-height: 1.5;
+}
+
 .btn-doggy {
     background-color: #FF5D24;
     border-color: #FF5D24;
@@ -130,6 +135,14 @@ html, body {
 
 }
 
+.bg-doggy {
+  background-color: #ff6e39;
+}
+
+.border-doggy {
+border-color: #ff6e39;
+border-radius: 8px;
+}
 .card {
   padding: 50px;
   margin-bottom: 10px;
