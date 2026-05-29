@@ -27,7 +27,11 @@
 
   </div>
 
-  <div class="mb-4">
+  <div class="mb-3">
+        <%= form.label :photo, "Photo du chien" %>
+        <%= form.file_field :photo, accept: "image/jpeg,image/png", class: "form-control" %>
+      </div>
+    <div class="mb-4">
 
     <%= form.label :description, class: "form-label" %>
 

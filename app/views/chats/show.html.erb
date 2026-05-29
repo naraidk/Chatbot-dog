@@ -54,7 +54,7 @@
       </div>
 
       <!-- MESSAGES -->
-      <div class="flex-grow-1 overflow-auto p-4">
+      <div class="flex-grow-1 overflow-auto p-4 messages-container">
         <% if @messages.any? %>
         <% @chat.messages.each do |message| %>
         <% if message.persisted? %>
@@ -90,7 +90,7 @@
         <% end %>
         <% end %>
   <% else %>
-<div class=“text-center text-muted mt-5">
+<div class= "text-center text-muted mt-5">
 <p>Posez votre première question ci-dessous pour démarrer la conversation !</p>
 </div>
 
@@ -124,5 +124,4 @@
     </div>
 
   </div>
-
 </div>
