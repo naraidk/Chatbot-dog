@@ -10,10 +10,11 @@ class MessagesController < ApplicationController
     if @user_message.save
       ruby_llm_chat = RubyLLM.chat
 
-      @chat.messages.order(created_at: :asc).each do |message|
+
+      @chat.messages.order(:created_at).last(10).each do |msg|
         ruby_llm_chat.add_message(
-          role: message.role,
-          content: message.content
+          role: msg.role,
+          content: msg.content
         )
       end
 
@@ -41,24 +42,33 @@ class MessagesController < ApplicationController
 
         Format de réponse obligatoire :
         1. Structure la réponse en sections numérotées (1, 2, 3…).
-        2. Ajoute des sous‑points indentés avec des tirets.
+        2. Ajoute des sous-points indentés avec des tirets.
         3. Sépare chaque section par un paragraphe clair.
         4. Utilise une indentation propre :
               - un niveau pour les sections
-              - un niveau pour les sous‑points
+              - un niveau pour les sous-points
         5. Limite la réponse à 3 niveaux maximum.
         6. Présente les conseils sous forme de liste lisible et aérée.
         7. Ne jamais écrire un bloc de texte compact : toujours structurer.
         "
       ).ask(@user_message.content)
 
-      @chat.messages.create!(
-        role: "assistant",
-        content: response.content
-      )
+      @assistant_message = @chat.messages.create!(
+      role: "assistant",
+      content: response.content
+    )
+      @message = @user_message
 
-      redirect_to chat_path(@chat)
+      respond_to do |format|
+        format.turbo_stream
+        format.html { redirect_to chat_path(@chat) }
+      end
+
     else
+      respond_to do |format|
+        format.turbo_stream { render turbo_stream: turbo_stream.update("new_message_container", partial: "messages/form", locals: { chat: @chat, message: @message }) }
+        format.html { render "chats/show", status: :unprocessable_entity }
+      end
       # Corrections ici : orthographe de @messages et de :created_at
       @messages = @chat.messages.order(created_at: :asc)
       @message = @user_message

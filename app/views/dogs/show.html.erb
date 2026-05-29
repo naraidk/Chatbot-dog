@@ -38,6 +38,7 @@
       <p>
         <strong>Âge :</strong>
         <%= @dog.age || "Non renseigné" %>
+        <span>ans</span>
       </p>
 
       <p>
@@ -47,12 +48,12 @@
 
       <div class="d-flex gap-2 mt-4">
 
-        <%= button_to "Commencer une conversation",
+        <%= button_to "Assistant de #{@dog.name}",
             dog_chats_path(@dog),
             method: :post,
             class: "btn btn-primary rounded-pill px-4" %>
 
-        <%= button_to "Supprimer",
+        <%= button_to "Supprimer #{@dog.name}",
             dog_path(@dog),
             method: :delete,
             data: {
