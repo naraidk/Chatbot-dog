@@ -19,7 +19,8 @@ class DogsController < ApplicationController
   end
 
   def show
-    @dog = current_user.dogs.find(params[:id])
+    @dog = current_user.dogs.find_by(id: params[:id])
+    redirect_to dogs_path, alert: "Ce chien n'existe plus." unless @dog
   end
 
   def update
@@ -33,7 +34,7 @@ class DogsController < ApplicationController
   end
 
   def destroy
-    @dog = Dog.find(params[:id])
+    @dog = current_user.dogs.find(params[:id])
     @dog.destroy
     redirect_to dogs_path, notice: "Profil du chien supprimé."
   end
@@ -41,6 +42,6 @@ class DogsController < ApplicationController
   private
 
   def dog_params
-    params.require(:dog).permit(:name, :breed, :age, :description)
+    params.require(:dog).permit(:name, :breed, :age, :description, :photo)
   end
 end
