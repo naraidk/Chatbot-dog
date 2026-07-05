@@ -232,13 +232,13 @@ border-radius: 8px;
   width: 100%;
 }
 
-.split-background-images {
-  // On définit deux images. La première est à gauche, la seconde à droite.
-  // "50% 100%" signifie que chaque image prend 50% de la largeur du bloc.
- background-image: image-url('dogs_pic.jpg');
-  background-size: cover;
-  background-position: center;
-}
+// .split-background-images {
+//   // On définit deux images. La première est à gauche, la seconde à droite.
+//   // "50% 100%" signifie que chaque image prend 50% de la largeur du bloc.
+//  background-image: image-url('dogs_pic.jpg');
+//   background-size: cover;
+//   background-position: center;
+// }
 
 h1, h1, h3, h4, h5 {
       font-family: "DM Sans", sans-serif;

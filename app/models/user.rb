@@ -1,9 +1,5 @@
 class User < ApplicationRecord
-  devise :database_authenticatable,
-         :registerable,
-         :recoverable,
-         :rememberable,
-         :validatable
+  # Devise removed: authentication handled externally or not required
 
   has_many :dogs, dependent: :destroy
   has_many :chats, dependent: :destroy

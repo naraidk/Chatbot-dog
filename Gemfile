@@ -17,10 +17,8 @@ gem "stimulus-rails"
 gem "jbuilder"
 
 # Add Authentification to my project
-gem "devise"
-# Add image host
-gem "cloudinary"
-gem "activestorage-cloudinary-service"
+# Authentication removed (Devise)
+# Image hosting removed (Cloudinary)
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 # gem "bcrypt", "~> 3.1.7"
 

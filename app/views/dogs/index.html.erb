@@ -1,77 +1,53 @@
 <div class="container py-5">
-
-    <div class="d-flex justify-content-between align-items-center mb-4">
-      <div>
-        <h1 class="fw-bold">Mes chiens</h1>
-        <p class="text-muted">
-          Gère les profils de tes chiens.
-        </p>
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+      <h1 class="fw-bold">Liste de chien(s)</h1>
     </div>
-          <div>
-              <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "btn btn-doggy text-white " %>
 
-              <%= link_to "Ajouter un chien",
-                  new_dog_path,
-                  class: "btn btn-doggy text-white px-4" %>
-          </div>
   </div>
-
   <% if @dogs.any? %>
-
     <div class="row g-4">
-
       <% @dogs.each do |dog| %>
-
         <div class="col-md-4">
-
           <div class="card h-100 shadow-sm rounded-4 border-0">
-
             <div class="card-body p-4">
-
-              <% if dog.photo.attached? %>
-                <%= cl_image_tag dog.photo.key,
-                    width: 120, height: 120, crop: :fill,
-                    class: "rounded-circle mb-3" %>
-              <% end %>
-
               <h3 class="fw-bold">
+                <i class="fa-solid fa-dog"></i>
                 <%= dog.name %>
               </h3>
-
               <p class="text-muted mb-1">
                 Race : <%= dog.breed %>
               </p>
-
               <p>
                 Âge : <%= dog.age || "Non renseigné" %> ans
               </p>
-
               <div class="d-grid gap-2 mt-4">
 
-                <%= link_to "Voir profil",
+                <%= link_to "Voir profil de #{dog.name}",
                     dog_path(dog),
-                    class: "btn btn-outline-primary rounded-pill" %>
+                    class: "btn btn-primary rounded-pill" %>
 
                 <%= button_to "Assistant de #{dog.name}",
                     dog_chats_path(dog),
                     method: :post,
-                    class: "btn btn-primary rounded-pill" %>
+                    form: { class: "w-100" },
+                    class: "btn btn-success rounded-pill w-100" %>
 
               </div>
-
-            <div class="cards">
-                    <% @dogs.each do |dog| %>
-                    <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/breakfast.jpg)">
-                      <h3 class="fw-bold"><%= link_to dog.name, dog_path(dog),
-                          class: "btn btn-dark text-white" %><% dog.name %></h3>
-                    </div>
-                    <% end %>
-            </div>
-
             </div>
           </div>
+          <div class="row mt-4">
+      <div class="card h-100 shadow-sm rounded-4 border-0">
+        <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "text-muted text-decoration-underline" %>
+
+        <%= link_to "Ajouter un chien",
+            new_dog_path,
+            class: "text-muted text-decoration-underline" %>
+      </div>
+    </div>
         </div>
       <% end %>
     </div>
   <% end %>
+
 </div>

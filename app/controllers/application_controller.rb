@@ -1,15 +1,13 @@
 class ApplicationController < ActionController::Base
-  # Protect every route by default
-  before_action :authenticate_user!
+  # Devise removed: use a fallback user so app controllers can still work
+  helper_method :current_user, :user_signed_in?
 
-  before_action :configure_permitted_parameters, if: :devise_controller?
+  def current_user
+    @current_user ||= User.first_or_create!(email: "user@example.com")
+  end
 
-  def configure_permitted_parameters
-    # For additional fields in app/views/devise/registrations/new.html.erb
-    devise_parameter_sanitizer.permit(:sign_up, keys: %i[first_name last_name])
-
-    # For additional in app/views/devise/registrations/edit.html.erb
-    devise_parameter_sanitizer.permit(:account_update, keys: %i[first_name last_name])
+  def user_signed_in?
+    current_user.present?
   end
 
   # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.

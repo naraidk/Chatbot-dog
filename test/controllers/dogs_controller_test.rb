@@ -2,17 +2,20 @@ require "test_helper"
 
 class DogsControllerTest < ActionDispatch::IntegrationTest
   test "should get new" do
-    get dogs_new_url
+    get new_dog_url
     assert_response :success
+    assert_select "form"
   end
 
   test "should get index" do
-    get dogs_index_url
+    get dogs_url
     assert_response :success
   end
 
   test "should get show" do
-    get dogs_show_url
+    dog = Dog.create!(name: "Rex", breed: "Labrador", user: User.first_or_create!(email: "user@example.com"))
+
+    get dog_url(dog)
     assert_response :success
   end
 end

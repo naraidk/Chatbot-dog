@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  devise_for :users
+  # Devise routes removed — provide minimal redirects so existing links don't 404
+  get  '/users/sign_in',  to: redirect('/'), as: :new_user_session
+  delete '/users/sign_out', to: redirect('/'), as: :destroy_user_session
 
   # root to: "pages#home"
   root "dogs#index"
